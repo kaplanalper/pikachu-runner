@@ -33,16 +33,16 @@ class Pikachu(pygame.sprite.Sprite):
     def input(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE] and self.rect.bottom >= self.pos_y:
-            self.gravity = -30
+            self.gravity = -20
             self.jump_sound.play()
 
     def apply_gravity(self):
-        self.gravity += 3
+        self.gravity += 1
         self.rect.y += self.gravity
         
-        if self.gravity > -5:
+        if self.gravity > 0:
             self.jump = self.jump2
-        elif self.gravity < -20:
+        elif self.gravity < -10:
             self.jump = self.jump1
 
         if self.rect.bottom > self.pos_y:
@@ -53,7 +53,7 @@ class Pikachu(pygame.sprite.Sprite):
         if self.rect.bottom < self.pos_y:
             self.image = self.jump
         else:
-            self.index += 0.5
+            self.index += 0.2
             if self.index >= len(self.run): self.index = 0
             self.image = self.run[int(self.index)]
 

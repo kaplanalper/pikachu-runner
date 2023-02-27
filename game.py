@@ -6,16 +6,11 @@ from enemy import Enemy
 from random import choice
 from settings import *
 
-def quit():
-    pygame.quit()
-    sys.exit()
-
-
 class Game:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption("Pikachu Runner")
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.clock = pygame.time.Clock()
 
         # fonts
@@ -58,19 +53,17 @@ class Game:
 
         self.running = False
 
-
         # timer
         self.obstacle_timer = pygame.USEREVENT + 1
         pygame.time.set_timer(self.obstacle_timer, 1500)
 
     def run(self):
         while True:
-            self.clock.tick(FPS)
             display_score_pos_y = 50
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    quit()
+                    self.quit()
 
                 if event.type == self.obstacle_timer:
                     # 25% chance of spawning a fly
@@ -78,7 +71,7 @@ class Game:
 
             keys = pygame.key.get_pressed()
             if keys[pygame.K_ESCAPE]:
-                quit()
+                self.quit()
 
             if self.running:
                 self.score = int(pygame.time.get_ticks() / 1000) - self.start_time
@@ -134,6 +127,10 @@ class Game:
             return False
         else:
             return True
+    
+    def quit(self):
+        pygame.quit()
+        sys.exit()
 
 if __name__ == '__main__':
     game = Game()

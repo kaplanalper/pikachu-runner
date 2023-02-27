@@ -33,9 +33,9 @@ class Enemy(pygame.sprite.Sprite):
 
     def animate(self):
         if self.type == "skeleton":
-            self.index += 3
+            self.index += 1
         elif self.type == "fly":
-            self.index += 0.2
+            self.index += 0.1
 
         if self.index >= len(self.frames): self.index = 0
         self.image = self.frames[int(self.index)]
@@ -44,9 +44,9 @@ class Enemy(pygame.sprite.Sprite):
         self.animate()
 
         if self.type == "skeleton":
-            self.rect.x -= 15
+            self.rect.x -= 7.5
         elif self.type == "fly":
-            self.rect.x -= 15
+            self.rect.x -= 7.5
         self.destroy()
 
     def destroy(self):
